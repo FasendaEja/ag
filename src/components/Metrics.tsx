@@ -45,6 +45,7 @@ const qualityMetrics: QualityMetric = {
 
 const timelineData = [
   { time: "10:00:01", event: "Система запущена", type: "start" },
+  { time: "10:00:01", event: "DoQA auth: Bearer token configured", type: "complete" },
   { time: "10:00:02", event: "Этап 1: Получение требований", type: "stage" },
   { time: "10:00:05", event: "Этап 1 завершён", type: "complete" },
   { time: "10:01:15", event: "Подтверждение человека", type: "human" },

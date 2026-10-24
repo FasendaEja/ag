@@ -1,4 +1,14 @@
-const tbdItems = [
+interface TBDItem {
+  id: number;
+  question: string;
+  description: string;
+  impact: string;
+  category: string;
+  file: string;
+  resolved?: boolean;
+}
+
+const tbdItems: TBDItem[] = [
   {
     id: 1,
     question: "Точные эндпоинты DoQA API 4.3.1",
@@ -34,10 +44,11 @@ const tbdItems = [
   {
     id: 5,
     question: "Способ аутентификации в DoQA API",
-    description: "Неизвестен метод аутентификации: Bearer token, API key, Basic auth, OAuth и т.д.",
-    impact: "Невозможно настроить авторизацию в адаптере.",
+    description: "Определён: Bearer token. Токен передаётся в заголовке Authorization.",
+    impact: "✅ Решено. Адаптер настраивается на отправку заголовка Authorization: Bearer <token>. Токен берётся из переменной окружения DOQA_API_TOKEN.",
     category: "security",
     file: ".env.example",
+    resolved: true,
   },
   {
     id: 6,
@@ -161,22 +172,26 @@ export default function TBD() {
       </div>
 
       {/* Summary */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+        <div className="bg-emerald-500/10 rounded-xl p-4 border border-emerald-500/20">
+          <p className="text-2xl font-bold text-emerald-400">1</p>
+          <p className="text-xs text-gray-400">Решено</p>
+        </div>
         <div className="bg-violet-500/10 rounded-xl p-4 border border-violet-500/20">
-          <p className="text-2xl font-bold text-violet-400">7</p>
+          <p className="text-2xl font-bold text-violet-400">6</p>
           <p className="text-xs text-gray-400">Интеграции</p>
         </div>
         <div className="bg-cyan-500/10 rounded-xl p-4 border border-cyan-500/20">
           <p className="text-2xl font-bold text-cyan-400">2</p>
           <p className="text-xs text-gray-400">Архитектура</p>
         </div>
-        <div className="bg-red-500/10 rounded-xl p-4 border border-red-500/20">
-          <p className="text-2xl font-bold text-red-400">1</p>
-          <p className="text-xs text-gray-400">Безопасность</p>
-        </div>
         <div className="bg-amber-500/10 rounded-xl p-4 border border-amber-500/20">
           <p className="text-2xl font-bold text-amber-400">2</p>
           <p className="text-xs text-gray-400">Конфигурация</p>
+        </div>
+        <div className="bg-red-500/10 rounded-xl p-4 border border-red-500/20">
+          <p className="text-2xl font-bold text-red-400">1</p>
+          <p className="text-xs text-gray-400">Безопасность</p>
         </div>
       </div>
 
@@ -184,25 +199,57 @@ export default function TBD() {
       <div className="space-y-3">
         {tbdItems.map((item) => {
           const cat = categoryConfig[item.category];
+          const isResolved = item.resolved;
           return (
-            <div key={item.id} className="bg-gray-900 rounded-xl border border-gray-800 p-5">
+            <div
+              key={item.id}
+              className={`rounded-xl border p-5 ${
+                isResolved
+                  ? "bg-emerald-500/5 border-emerald-500/30"
+                  : "bg-gray-900 border-gray-800"
+              }`}
+            >
               <div className="flex items-start gap-4">
-                <span className="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-sm font-bold text-amber-400 flex-shrink-0">
-                  {item.id}
+                <span
+                  className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0 ${
+                    isResolved
+                      ? "bg-emerald-500/20 border border-emerald-500/30 text-emerald-400"
+                      : "bg-amber-500/10 border border-amber-500/20 text-amber-400"
+                  }`}
+                >
+                  {isResolved ? (
+                    <i className="fa-solid fa-check" />
+                  ) : (
+                    item.id
+                  )}
                 </span>
                 <div className="flex-1 space-y-2">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <h3 className="text-sm font-semibold text-white">{item.question}</h3>
+                    <h3 className={`text-sm font-semibold ${isResolved ? "text-emerald-300" : "text-white"}`}>
+                      {item.question}
+                    </h3>
                     <span className={`text-[10px] px-2 py-0.5 rounded-full border ${cat.color} flex items-center gap-1`}>
                       <i className={`${cat.icon} text-[8px]`} />
                       {cat.label}
                     </span>
+                    {isResolved && (
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
+                        <i className="fa-solid fa-circle-check text-[8px]" />
+                        Решено
+                      </span>
+                    )}
                   </div>
                   <p className="text-xs text-gray-400">{item.description}</p>
-                  <div className="bg-amber-500/5 rounded-lg p-2.5 border border-amber-500/10">
-                    <p className="text-[11px] text-amber-400/80">
-                      <i className="fa-solid fa-triangle-exclamation text-[9px] mr-1" />
-                      <span className="font-semibold">Влияние:</span> {item.impact}
+                  <div
+                    className={`rounded-lg p-2.5 border ${
+                      isResolved
+                        ? "bg-emerald-500/5 border-emerald-500/10"
+                        : "bg-amber-500/5 border-amber-500/10"
+                    }`}
+                  >
+                    <p className={`text-[11px] ${isResolved ? "text-emerald-400/80" : "text-amber-400/80"}`}>
+                      <i className={`fa-solid ${isResolved ? "fa-circle-check" : "fa-triangle-exclamation"} text-[9px] mr-1`} />
+                      <span className="font-semibold">{isResolved ? "Решение:" : "Влияние:"}</span> {item.impact}
                     </p>
                   </div>
                   <code className="text-[10px] text-gray-500 font-mono">
@@ -264,8 +311,9 @@ export default function TBD() {
   version: "4.3.1"
   base_url: "TBD"
   auth:
-    type: "TBD"
-    header_name: "TBD"
+    type: "bearer"
+    header_name: "Authorization"
+    header_value_template: "Bearer {token}"
     token_env: "DOQA_API_TOKEN"
 
   endpoints:

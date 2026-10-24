@@ -299,6 +299,10 @@ class DoQAAPIAdapter:
     """
     Адаптер DoQA API 4.3.1.
     
+    Аутентификация: Bearer token
+    Заголовок: Authorization: Bearer <token>
+    Токен: из переменной окружения DOQA_API_TOKEN
+    
     До получения документации работает в mock/dry-run режиме.
     Все эндпоинты помечены как TBD.
     """
@@ -307,6 +311,18 @@ class DoQAAPIAdapter:
         self.config = config
         self.contract = self._load_contract()
         self._validate_contract()
+        self.session = self._build_session()
+    
+    def _build_session(self) -> httpx.AsyncClient:
+        """Создаёт HTTP-сессию с Bearer-аутентификацией."""
+        return httpx.AsyncClient(
+            base_url=self.config.base_url,
+            headers={
+                "Authorization": f"Bearer {self.config.api_token}",
+                "Accept": "application/json",
+            },
+            timeout=self.config.timeout,
+        )
     
     def _validate_contract(self) -> None:
         """Проверяет, что контракт заполнен."""

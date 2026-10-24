@@ -79,8 +79,13 @@ export default function Overview() {
             name="DoQA"
             version="API 4.3.1"
             description="TMS для хранения и управления тест-кейсами"
-            status="tbd"
-            items={["Импорт/экспорт кейсов", "Управление статусами", "Структура кейсов"]}
+            status="partial"
+            items={[
+              "✅ Bearer token аутентификация",
+              "Импорт/экспорт кейсов (TBD)",
+              "Управление статусами (TBD)",
+              "Структура кейсов (TBD)",
+            ]}
           />
           <IntegrationCard
             name="Redmine"

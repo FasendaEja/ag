@@ -18,6 +18,7 @@ const logData: LogEntry[] = [
   { id: 1, timestamp: "2024-01-15 10:00:01.234", level: "INFO", stage: null, stageName: null, iteration: null, module: "main", message: "QA Agent System started" },
   { id: 2, timestamp: "2024-01-15 10:00:01.456", level: "INFO", stage: null, stageName: null, iteration: null, module: "config", message: "Configuration loaded: LLM_MODEL=qwen3.8, RULES_FILE_PATH=rules/doqa_rules.md" },
   { id: 3, timestamp: "2024-01-15 10:00:01.789", level: "INFO", stage: null, stageName: null, iteration: null, module: "rules_loader", message: "Loaded rules: rules/doqa_rules.md (version=1.10.0, hash=a3f8c2d1)" },
+  { id: 3.1, timestamp: "2024-01-15 10:00:01.890", level: "INFO", stage: null, stageName: null, iteration: null, module: "doqa_api_adapter", message: "DoQA auth configured: Bearer token (header=Authorization)" },
   { id: 4, timestamp: "2024-01-15 10:00:02.012", level: "INFO", stage: 1, stageName: "requirement_intake", iteration: 1, module: "stage_gate", message: "Stage 1 started: requirement_intake" },
   { id: 5, timestamp: "2024-01-15 10:00:02.345", level: "DEBUG", stage: 1, stageName: "requirement_intake", iteration: 1, module: "folder_input_adapter", message: "Scanning folder: ./requirements/ (recursive=true)" },
   { id: 6, timestamp: "2024-01-15 10:00:02.567", level: "INFO", stage: 1, stageName: "requirement_intake", iteration: 1, module: "folder_input_adapter", message: "Found 2 files: requirements_v1.md, requirements_v2.md" },

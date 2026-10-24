@@ -27,7 +27,7 @@ const envVars = [
   { group: "DoQA", vars: [
     { key: "DOQA_BASE_URL", desc: "URL DoQA", secret: false },
     { key: "DOQA_API_VERSION", desc: "Версия API", default: "4.3.1" },
-    { key: "DOQA_API_TOKEN", desc: "API-токен DoQA", secret: true },
+    { key: "DOQA_API_TOKEN", desc: "Bearer-токен DoQA (передаётся в Authorization)", secret: true },
     { key: "DOQA_TIMEOUT", desc: "Таймаут (сек)", default: "60" },
     { key: "DOQA_MAX_RETRIES", desc: "Макс. повторов", default: "3" },
     { key: "DOQA_IMPORT_MODE", desc: "Режим импорта", default: "file" },

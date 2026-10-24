@@ -359,6 +359,7 @@ REDMINE_PROJECT_ID=
 # ============ DoQA ============
 DOQA_BASE_URL=https://doqa.example.com
 DOQA_API_VERSION=4.3.1
+# Bearer token — передаётся в заголовке Authorization
 DOQA_API_TOKEN=
 DOQA_TIMEOUT=60
 DOQA_MAX_RETRIES=3
@@ -389,10 +390,11 @@ OPENAI_BASE_URL=https://api.openai.com/v1
 LLM_MODEL=qwen3.8
 
 # Остальное — опционально.
-# DoQA будет в dry-run режиме (контракт TBD).
+# DoQA — в dry-run режиме (Bearer token известен,
+# но точные эндпоинты ещё TBD).
 # Codebase agent — недоступен (частичный контекст).
 # Redmine — не используется.`,
-      note: "В таком режиме система работает полностью локально, DoQA — в dry-run, кодовая база не используется.",
+      note: "В таком режиме система работает полностью локально. DoQA аутентификация настроена (Bearer token), но реальные запросы не выполняются до заполнения контракта API.",
     },
     {
       title: "Проверка конфигурации",
