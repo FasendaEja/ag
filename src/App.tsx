@@ -12,9 +12,11 @@ import Demo from "./components/Demo";
 import DataFlow from "./components/DataFlow";
 import LogViewer from "./components/LogViewer";
 import Metrics from "./components/Metrics";
+import Deployment from "./components/Deployment";
 
 type Section =
   | "overview"
+  | "deployment"
   | "pipeline"
   | "demo"
   | "agents"
@@ -30,6 +32,7 @@ type Section =
 
 const navItems: { id: Section; label: string; icon: string; group?: string }[] = [
   { id: "overview", label: "Обзор системы", icon: "fa-solid fa-house", group: "Общее" },
+  { id: "deployment", label: "Как развернуть", icon: "fa-solid fa-rocket", group: "Общее" },
   { id: "pipeline", label: "Пайплайн (12 этапов)", icon: "fa-solid fa-diagram-project", group: "Общее" },
   { id: "demo", label: "Демо пайплайна", icon: "fa-solid fa-play", group: "Общее" },
   { id: "agents", label: "Агенты", icon: "fa-solid fa-robot", group: "Компоненты" },
@@ -51,6 +54,7 @@ export default function App() {
   const renderSection = () => {
     switch (activeSection) {
       case "overview": return <Overview />;
+      case "deployment": return <Deployment />;
       case "pipeline": return <Pipeline />;
       case "demo": return <Demo />;
       case "agents": return <Agents />;
