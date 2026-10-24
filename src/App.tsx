@@ -9,8 +9,24 @@ import Schemas from "./components/Schemas";
 import Agents from "./components/Agents";
 import CodePreview from "./components/CodePreview";
 import Demo from "./components/Demo";
+import DataFlow from "./components/DataFlow";
+import LogViewer from "./components/LogViewer";
+import Metrics from "./components/Metrics";
 
-type Section = "overview" | "pipeline" | "demo" | "agents" | "schemas" | "architecture" | "code" | "configuration" | "rules" | "tbd";
+type Section =
+  | "overview"
+  | "pipeline"
+  | "demo"
+  | "agents"
+  | "schemas"
+  | "code"
+  | "dataflow"
+  | "logs"
+  | "metrics"
+  | "architecture"
+  | "configuration"
+  | "rules"
+  | "tbd";
 
 const navItems: { id: Section; label: string; icon: string; group?: string }[] = [
   { id: "overview", label: "Обзор системы", icon: "fa-solid fa-house", group: "Общее" },
@@ -19,6 +35,9 @@ const navItems: { id: Section; label: string; icon: string; group?: string }[] =
   { id: "agents", label: "Агенты", icon: "fa-solid fa-robot", group: "Компоненты" },
   { id: "schemas", label: "Pydantic-схемы", icon: "fa-solid fa-cube", group: "Компоненты" },
   { id: "code", label: "Примеры кода", icon: "fa-solid fa-code", group: "Компоненты" },
+  { id: "dataflow", label: "Потоки данных", icon: "fa-solid fa-arrow-right-arrow-left", group: "Мониторинг" },
+  { id: "logs", label: "Лог-просмотрщик", icon: "fa-solid fa-file-lines", group: "Мониторинг" },
+  { id: "metrics", label: "Метрики", icon: "fa-solid fa-chart-line", group: "Мониторинг" },
   { id: "architecture", label: "Архитектура", icon: "fa-solid fa-sitemap", group: "Проект" },
   { id: "configuration", label: "Конфигурация", icon: "fa-solid fa-gears", group: "Проект" },
   { id: "rules", label: "Правила DoQA", icon: "fa-solid fa-book", group: "Проект" },
@@ -37,6 +56,9 @@ export default function App() {
       case "agents": return <Agents />;
       case "schemas": return <Schemas />;
       case "code": return <CodePreview />;
+      case "dataflow": return <DataFlow />;
+      case "logs": return <LogViewer />;
+      case "metrics": return <Metrics />;
       case "architecture": return <Architecture />;
       case "configuration": return <Configuration />;
       case "rules": return <Rules />;
@@ -44,7 +66,6 @@ export default function App() {
     }
   };
 
-  // Group nav items
   const groups = Array.from(new Set(navItems.map((i) => i.group || "")));
 
   return (
